@@ -1,49 +1,50 @@
-const amigos = [];
+let amigos = [];
 
 function adicionarAmigo (){
-    const input = document.getElementById("amigo");
-    const nome = input.value;
+    
+    let input = document.getElementById("amigo");
+    let pessoa = input.value;
 
-    if (amigos.includes(nome)) {
-        alert("Nome já adicionado, tente novamente");
+    if (amigos.includes(pessoa)) {
+        alert("Essa pessoa já está incluída na lista, tente novamente");
         return;
     }
 
-    amigos.push(nome);
-
+    amigos.push(pessoa);
     input.value = "";
-    atualizarLista();
     
-
+    atualizarLista();
     
 }
 
 function atualizarLista(){
+    
     const lista = document.getElementById("listaAmigos");
     lista.innerHTML = amigos.map(amigo => `<li>${amigo}</li>`).join("");
+    
 }
 
 
 function sortearAmigo() {
+    
     if (amigos.length < 2) {
-        alert("É necessário no mínimo duas pessoas a serem sorteadas");
+        alert("É necessário no mínimo duas pessoas para serem sorteadas");
         return;
     }
 
     let sorteio = [];
-    let copiaAmigos = [...amigos];
+    let arrayAmigos = [...amigos];
 
     amigos.forEach(amigo => {
         let index;
         do {
-            index = Math.floor(Math.random() * copiaAmigos.length);
-        } while (copiaAmigos[index] === amigo);
+            index = Math.floor(Math.random() * arrayAmigos.length);
+        } while (arrayAmigos[index] === amigo);
 
-        sorteio.push(`${amigo} → ${copiaAmigos[index]}`);
-        copiaAmigos.splice(index, 1);
+        sorteio.push(`${amigo} → ${arrayAmigos[index]}`);
+        arrayAmigos.splice(index, 1);
     });
 
     document.getElementById("resultado").innerHTML = sorteio.join("<br>");
+    
 }
-
-
